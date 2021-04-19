@@ -15,7 +15,7 @@ namespace Proy_02.Controllers
         [HttpGet]
         public string Get()
         {
-            return "cadena";
+            return "cadena2";
         }
 
         // GET api/values/5
