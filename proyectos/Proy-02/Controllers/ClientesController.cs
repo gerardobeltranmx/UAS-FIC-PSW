@@ -38,7 +38,12 @@ namespace Proy_02.Controllers
         [HttpGet("{id}")]
         public string Get(int id)
         {
-            return "value";
+            Persona Cliente;
+
+            Cliente = Clientes.Find(c => c.id == id);
+
+
+            return JsonConvert.SerializeObject(Cliente);
         }
 
         // POST api/values
