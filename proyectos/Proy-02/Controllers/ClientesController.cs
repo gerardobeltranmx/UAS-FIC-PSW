@@ -13,9 +13,9 @@ namespace Proy_02.Controllers
     {
         // GET: api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public string Get()
         {
-            return new string[] { "value1", "value2" };
+            return "cadena";
         }
 
         // GET api/values/5
