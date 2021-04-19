@@ -3,8 +3,17 @@ namespace Proy_02.Models
 {
     public class Persona
     {
-        public Persona()
+        public int id { get; set; }
+        public string nombre { get; set; }
+        public int edad { get; set; }
+
+
+        public Persona(int id, string nombre, int edad)
         {
+            this.id = id;
+            this.nombre = nombre;
+            this.edad = edad;
         }
+
     }
 }

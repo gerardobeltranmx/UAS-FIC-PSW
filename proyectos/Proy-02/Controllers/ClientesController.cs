@@ -11,6 +11,16 @@ namespace Proy_02.Controllers
     [Route("api/[controller]")]
     public class ClientesController : Controller
     {
+        
+        List<Models.Persona> Clientes = new List<Models.Persona>();
+
+        public ClientesController()
+        {
+            Clientes.Add(new Models.Persona(1, "Hugo", 11));
+            Clientes.Add(new Models.Persona(2, "Paco", 12));
+            Clientes.Add(new Models.Persona(3, "Luis", 13));
+        }
+
         // GET: api/values
         [HttpGet]
         public string Get()
