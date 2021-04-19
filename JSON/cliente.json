@@ -1,0 +1,72 @@
+{
+    "Sucursal":"Centro",
+    "Gerente": "Jorge Medina Beltran",
+    "Empleados": [
+                {
+                    "nombre":"Maria Josefina Rodriguez",
+                    "edad": 23,
+                    "domicilio":"Muy lejos"
+                },
+                {
+                    "nombre":"Miguel Bernal",
+                    "edad": 33,
+                    "domicilio":"Muy cerca"
+                } 
+                ],
+    "Clientes":[  
+                {
+                    "Clave":123,
+                    
+                    "NombreCompleto":{ 
+                                        "Nombres":"Jose Luis",
+                                        "ApellidoPaterno":"Perez",
+                                        "ApellidoMaterno":"Lopez"
+                                    },
+                    "FechaNacimiento":"2000-10-11",
+                    "CorreoElectronico": "jperez@gmail.com",
+                    "Telefono": "12-12-12-12-12",
+                    "Domicilios":[
+                                    {"Calle": "Domigo Rubi",
+                                    "Numero": 1234,
+                                    "Colonia": "Centro",
+                                    "Ciudad": "Culiacan",
+                                    "Estado": "Sinaloa"
+                                    },
+                                    {"Calle": "alfonso Zaragoza",
+                                        "Numero": 4345,
+                                        "Colonia": "Buenos Aires",
+                                        "Ciudad": "Mazatlan",
+                                        "Estado": "Sinaloa"
+                                    }
+                                ]  
+                },
+                {
+                    "Clave":124,
+                    
+                    "NombreCompleto":{ 
+                                        "Nombres":"Jose Luis",
+                                        "ApellidoPaterno":"Perez",
+                                        "ApellidoMaterno":"Lopez"
+                                    },
+                    "FechaNacimiento":"2000-10-11",
+                    "CorreoElectronico": "jperez@gmail.com",
+                    "Telefono": "12-12-12-12-12",
+                    "Domicilios":[
+                                    {"Calle": "Domigo Rubi",
+                                    "Numero": 1234,
+                                    "Colonia": "Centro",
+                                    "Ciudad": "Culiacan",
+                                    "Estado": "Sinaloa"
+                                    },
+                                    {"Calle": "alfonso Zaragoza",
+                                        "Numero": 4345,
+                                        "Colonia": "Buenos Aires",
+                                        "Ciudad": "Mazatlan",
+                                        "Estado": "Sinaloa"
+                                    }
+                                ]  
+                }
+
+  ]   
+  
+}    
