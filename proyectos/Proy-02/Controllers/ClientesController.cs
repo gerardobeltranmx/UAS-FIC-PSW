@@ -25,7 +25,7 @@ namespace Proy_02.Controllers
 
         // GET: api/values
         [HttpGet]
-        public string Get()
+        public string Get() // Retorna una lista de clientes
         {
             string json;
 
@@ -36,14 +36,14 @@ namespace Proy_02.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public string Get(int id) // Retorna un cliente con un "id" para pasado como parametro
         {
             Persona Cliente;
 
-            Cliente = Clientes.Find(c => c.id == id);
+            Cliente = Clientes.Find(c => c.id == id); // Busca un cliente por "id"
 
 
-            return JsonConvert.SerializeObject(Cliente);
+            return JsonConvert.SerializeObject(Cliente); // Retorna los datos del cliente en un JSON
         }
 
         // POST api/values
