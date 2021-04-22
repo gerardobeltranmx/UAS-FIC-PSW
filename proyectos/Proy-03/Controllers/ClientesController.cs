@@ -14,7 +14,7 @@ namespace Proy_03.Controllers
     public class ClientesController : Controller
     {
 
-        string arch = @"/Users/gerardo/JSON/clientes.json";
+        string arch = @"/Users/gerardo/Documents/UAS-FIC-PSW/JSON/clientes.json";
         // string arch = @"c:\clientes.json";
 
         List<Persona> Clientes;
@@ -33,16 +33,25 @@ namespace Proy_03.Controllers
 
         // GET: api/values
         [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
+        public string Get()
+        { 
+            string json;
+            json = JsonConvert.SerializeObject(Clientes);
+            return json;
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
-            return "value";
+            string json;
+            Persona Cliente;
+            // Busca cliente con id
+            Cliente = Clientes.Find(c => c.id == id);
+            // Convierte a json el objeto cliente
+            json = JsonConvert.SerializeObject(Cliente);
+
+            return json;
         }
 
         // POST api/values
