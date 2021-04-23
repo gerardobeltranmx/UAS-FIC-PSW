@@ -6,6 +6,8 @@ namespace Proy_03.Models
         public int id { get; set; }
         public string descripcion { get; set; }
         public decimal precio { get; set; }
+        public int existencia { get; set; }
+
         public Producto()
         {
         }
