@@ -56,8 +56,13 @@ namespace Proy_03.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] Persona p)
         {
+            Persona Cliente = new Persona(p.id, p.nombre, p.edad);
+            Clientes.Add(Cliente);
+            string json = JsonConvert.SerializeObject(Clientes);
+            System.IO.File.WriteAllText(arch, json);
+
         }
 
         // PUT api/values/5
