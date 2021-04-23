@@ -26,6 +26,7 @@ namespace Proy_03.Controllers
             // Leer el archivo json
             string json = jsonStream.ReadToEnd();
             Clientes = JsonConvert.DeserializeObject<List<Persona>>(json);
+            jsonStream.Close();
 
         }
 
@@ -61,8 +62,10 @@ namespace Proy_03.Controllers
             Persona Cliente = new Persona(p.id, p.nombre, p.edad);
             Clientes.Add(Cliente);
             string json = JsonConvert.SerializeObject(Clientes);
-            System.IO.File.WriteAllText(arch, json);
 
+            StreamReader jsonStream = System.IO.File.OpenText(arch);
+            System.IO.File.WriteAllText(arch, json);
+            jsonStream.Close();
         }
 
         // PUT api/values/5
