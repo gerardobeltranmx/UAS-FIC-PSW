@@ -70,8 +70,20 @@ namespace Proy_03.Controllers
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromBody] Persona p)
         {
+            Persona Cliente;
+            Cliente = Clientes.Find(c => c.id == id);
+            Cliente.id = p.id;
+            Cliente.nombre = p.nombre;
+            Cliente.edad = p.edad;
+            string json = JsonConvert.SerializeObject(Clientes);
+            StreamReader jsonStream = System.IO.File.OpenText(arch);
+            System.IO.File.WriteAllText(arch, json);
+            jsonStream.Close();
+
+
+
         }
 
         // DELETE api/values/5
