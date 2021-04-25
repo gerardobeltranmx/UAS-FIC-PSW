@@ -10,8 +10,6 @@ namespace Proy_03.Models
 
         public Producto(int id, string descripcion, decimal precio, int existencia)
         {
-
-
         }
 
 
