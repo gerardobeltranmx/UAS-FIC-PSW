@@ -8,7 +8,7 @@ namespace Proy_03.Models
         public decimal precio { get; set; }
         public int existencia { get; set; }
 
-        public Producto()
+        public Producto(int id, string descripcion, decimal precio, int existencia)
         {
         }
     }
