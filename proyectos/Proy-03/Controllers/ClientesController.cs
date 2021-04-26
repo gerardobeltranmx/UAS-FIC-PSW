@@ -30,7 +30,13 @@ namespace Proy_03.Controllers
 
         }
 
-
+        public void ActualizarJSON()
+        {
+            string json = JsonConvert.SerializeObject(Clientes);
+            StreamReader jsonStream = System.IO.File.OpenText(arch);
+            System.IO.File.WriteAllText(arch, json);
+            jsonStream.Close();
+        }
 
         // GET: api/values
         [HttpGet]
@@ -61,11 +67,8 @@ namespace Proy_03.Controllers
         {
             Persona Cliente = new Persona(p.id, p.nombre, p.edad);
             Clientes.Add(Cliente);
-            string json = JsonConvert.SerializeObject(Clientes);
 
-            StreamReader jsonStream = System.IO.File.OpenText(arch);
-            System.IO.File.WriteAllText(arch, json);
-            jsonStream.Close();
+            ActualizarJSON();
         }
 
         // PUT api/values/5
@@ -77,11 +80,8 @@ namespace Proy_03.Controllers
             Cliente.id = p.id;
             Cliente.nombre = p.nombre;
             Cliente.edad = p.edad;
-            string json = JsonConvert.SerializeObject(Clientes);
-            StreamReader jsonStream = System.IO.File.OpenText(arch);
-            System.IO.File.WriteAllText(arch, json);
-            jsonStream.Close();
 
+            ActualizarJSON();
 
 
         }
@@ -90,6 +90,17 @@ namespace Proy_03.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            Persona Cliente;
+
+            Cliente = Clientes.Find(c => c.id == id);
+            Clientes.Remove(Cliente);
+
+            ActualizarJSON();
+
+
+
+
+
         }
     }
 }
