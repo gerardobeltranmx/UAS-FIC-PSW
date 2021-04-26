@@ -30,7 +30,7 @@ namespace Proy_03.Controllers
 
         }
 
-        public void ActualizarJSON()
+        private void ActualizarJSON()
         {
             string json = JsonConvert.SerializeObject(Clientes);
             StreamReader jsonStream = System.IO.File.OpenText(arch);
@@ -96,10 +96,6 @@ namespace Proy_03.Controllers
             Clientes.Remove(Cliente);
 
             ActualizarJSON();
-
-
-
-
 
         }
     }
