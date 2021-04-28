@@ -14,7 +14,7 @@ namespace Proy_03
     [Route("api/[controller]")]
     public class FacturasController : Controller
     {
-        string arch = @"/Users/gerardo/Documents/UAS-FIC-PSW/JSON/facturas.json";
+        string arch = @"JSON/facturas.json";
         // string arch = @"c:\clientes.json";
 
         List<Factura> Facturas;
@@ -32,7 +32,7 @@ namespace Proy_03
 
         private void ActualizarJSON()
         {
-            string json = JsonConvert.SerializeObject(Factura);
+            string json = JsonConvert.SerializeObject(Facturas);
             StreamReader jsonStream = System.IO.File.OpenText(arch);
             System.IO.File.WriteAllText(arch, json);
             jsonStream.Close();
@@ -40,10 +40,12 @@ namespace Proy_03
 
 
         // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet()]
+        public string Get()
         {
-            return "value";
+            string json;
+            json = JsonConvert.SerializeObject(Facturas);
+            return json;
         }
 
         // POST api/values

@@ -1,0 +1,17 @@
+﻿[
+  {
+    "id": 1,
+    "idCliente": 1,
+    "SubTotal": 1000,
+    "IVA": 160,
+    "Total": 1160
+  },
+
+  {
+    "id": 2,
+    "idCliente": 2,
+    "SubTotal": 2000,
+    "IVA": 160,
+    "Total": 2160
+  }
+]
