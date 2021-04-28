@@ -13,5 +13,13 @@
     "SubTotal": 2000,
     "IVA": 160,
     "Total": 2160
+  },
+
+  {
+    "id": 3,
+    "idCliente": 1,
+    "SubTotal": 2450,
+    "IVA": 342,
+    "Total": 2323
   }
 ]

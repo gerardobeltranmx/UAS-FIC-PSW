@@ -39,7 +39,7 @@ namespace Proy_03
         }
 
 
-        // GET api/values/5
+      
         [HttpGet()]
         public string Get()
         {
@@ -47,6 +47,21 @@ namespace Proy_03
             json = JsonConvert.SerializeObject(Facturas);
             return json;
         }
+
+
+        // GET api/values/5
+        [HttpGet("/api/clientes/{idCliente}/facturas")] // api/1/facturas
+        public string Get(int idCliente)
+        {
+            string json;
+
+            List<Factura> FacturasCliente;
+            FacturasCliente = Facturas.Where(f => f.idCliente == idCliente).ToList();
+
+            json = JsonConvert.SerializeObject(FacturasCliente);
+            return json;
+        }
+
 
         // POST api/values
         [HttpPost]
