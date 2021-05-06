@@ -1,7 +1,7 @@
 ﻿[
   {
     "id": 1,
-    "idFactura": 1
+    "idFactura": 1,
     "idProducto": 231,
     "cantidad": 101,
     "precio": 56.42
@@ -9,7 +9,7 @@
 
   {
     "id": 2,
-    "idFactura": 1
+    "idFactura": 1,
     "idProducto": 232,
     "cantidad": 102,
     "precio": 562.42
