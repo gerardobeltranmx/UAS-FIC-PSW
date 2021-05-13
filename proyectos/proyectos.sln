@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proy-03", "Proy-03\Proy-03.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Control-de-Errores", "Control-de-Errores\Control-de-Errores.csproj", "{D5AA8B48-AE47-448B-8DCB-DAA60D5CC7C6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proy-Consola-01", "Proy-Consola-01\Proy-Consola-01.csproj", "{A3CD9A4A-8308-41E6-8D35-1C83217A60B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{D5AA8B48-AE47-448B-8DCB-DAA60D5CC7C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5AA8B48-AE47-448B-8DCB-DAA60D5CC7C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D5AA8B48-AE47-448B-8DCB-DAA60D5CC7C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3CD9A4A-8308-41E6-8D35-1C83217A60B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3CD9A4A-8308-41E6-8D35-1C83217A60B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3CD9A4A-8308-41E6-8D35-1C83217A60B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3CD9A4A-8308-41E6-8D35-1C83217A60B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
