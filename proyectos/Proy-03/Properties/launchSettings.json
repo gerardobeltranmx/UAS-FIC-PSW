@@ -19,7 +19,7 @@
     },
     "Proy_03": {
       "commandName": "Project",
-      "launchBrowser": true,
+      "launchBrowser": false,
       "launchUrl": "swagger",
       "applicationUrl": "https://localhost:8080;http://localhost:8081",
       "environmentVariables": {
