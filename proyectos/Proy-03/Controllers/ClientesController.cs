@@ -14,7 +14,7 @@ namespace Proy_03.Controllers
     public class ClientesController : Controller
     {
 
-        string arch = @"/Users/gerardo/Documents/UAS-FIC-PSW/JSON/clientes.json";
+        string arch = @"JSON/clientes.json";
         // string arch = @"c:\clientes.json";
 
         List<Persona> Clientes;
