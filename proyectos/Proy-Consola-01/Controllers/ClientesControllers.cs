@@ -15,7 +15,7 @@ namespace Proy_Consola_01.Controllers
             cli.Headers.Add("Content-Type:application/json");
             cli.Headers.Add("Accept:application/json");
 
-            var resultado = cli.DownloadString("https://localhost:8080/api/clientes");
+            var resultado = cli.DownloadString("https://localhost:44382/api/clientes");
 
             resultado = (string)JsonConvert.DeserializeObject(resultado);
 
@@ -33,7 +33,7 @@ namespace Proy_Consola_01.Controllers
             WebClient cli = new WebClient();
             cli.Headers.Add("Content-Type:application/json");
             cli.Headers.Add("Accept:application/json");
-            var resultado = cli.DownloadString("https://localhost:8080/api/clientes/" + num.ToString());
+            var resultado = cli.DownloadString("https://localhost:44382/api/clientes/" + num.ToString());
             resultado = (string)JsonConvert.DeserializeObject(resultado);
 
             Persona c = JsonConvert.DeserializeObject<Persona>(resultado);
