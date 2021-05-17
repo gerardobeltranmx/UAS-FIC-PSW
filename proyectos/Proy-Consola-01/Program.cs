@@ -12,44 +12,22 @@ namespace Proy_Consola_01
         static void Main(string[] args)
         {
             ClientesControllers ClientesOperaciones = new ClientesControllers();
-            ConsoleKey op = 0;
-            do
+
+            try
             {
-                Console.Clear();
-                Console.WriteLine("Menu");
-                Console.WriteLine("(N)uevo");
-                Console.WriteLine("(R)eporte");
-                Console.WriteLine("(B)uscar");
-                Console.WriteLine("(A)ctualizar");
-                Console.WriteLine("(E)liminar");
-                Console.WriteLine("(S)alir");
+                ClientesOperaciones.Reporte();
+                ClientesOperaciones.Buscar();
+               
 
-                Console.Write("Seleccione una opción: "); 
-                op = Console.ReadKey(false).Key;
-                Console.Clear();
+            }
+            catch(Exception ex)
+            {
 
-                try
-                {
-                    switch (op)
-                    {
-                        case ConsoleKey.R:
-                        ClientesOperaciones.Reporte();
-                        break;
+                Console.WriteLine(ex.Message);
+            }
 
-                        case ConsoleKey.B:
-                        ClientesOperaciones.Buscar();
-                        break;        
-                    }
-                }
-                catch (Exception ex)
-                {
 
-                    Console.WriteLine(ex.Message);
-                }
-                Console.WriteLine("Pulse una tecla para continuar");
-                Console.ReadKey(false);
 
-            } while (op!=ConsoleKey.S);
 
         }
     }
