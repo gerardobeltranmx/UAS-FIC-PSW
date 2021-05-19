@@ -32,6 +32,9 @@ namespace Proy_Consola_01
                 {
                     switch (op)
                     {
+                        case ConsoleKey.N:
+                            ClientesOperaciones.Nuevo();
+                            break;
                         case ConsoleKey.R:
                         ClientesOperaciones.Reporte();
                         break;
