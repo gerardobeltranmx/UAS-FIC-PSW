@@ -9,13 +9,43 @@ namespace Proy_Consola_01.Controllers
     public class ClientesControllers
     {
 
+        public void Nuevo()
+        {
+            Console.WriteLine("Nuevo Cliente");
+
+            Console.Write("Id     : ");
+            int id = int.Parse(Console.ReadLine());
+
+            Console.Write("Nombre : ");
+            string nombre = Console.ReadLine();
+
+            Console.Write("Edad:   ");
+            int edad = int.Parse(Console.ReadLine());
+
+            Persona Nuevo = new Persona(id, nombre, edad);
+
+            // Objeto de conexion con la Web API
+            WebClient cli = new WebClient();
+            cli.Headers.Add("Content-Type:application/json");
+            cli.Headers.Add("Accept:application/json");
+
+            // envia los datos del nuevo cliente a la Web API
+            var resultado = cli.UploadString("https://localhost:8080/api/clientes", "POST",
+                                               JsonConvert.SerializeObject(Nuevo));
+
+            Console.WriteLine("Cliente Registrado con exito!!!");
+
+
+
+        }
+
         public void Reporte()
         {
             WebClient cli = new WebClient();
             cli.Headers.Add("Content-Type:application/json");
             cli.Headers.Add("Accept:application/json");
 
-            var resultado = cli.DownloadString("https://localhost:44382/api/clientes");
+            var resultado = cli.DownloadString("https://localhost:8080/api/clientes");
 
             resultado = (string)JsonConvert.DeserializeObject(resultado);
 
@@ -33,7 +63,7 @@ namespace Proy_Consola_01.Controllers
             WebClient cli = new WebClient();
             cli.Headers.Add("Content-Type:application/json");
             cli.Headers.Add("Accept:application/json");
-            var resultado = cli.DownloadString("https://localhost:44382/api/clientes/" + num.ToString());
+            var resultado = cli.DownloadString("https://localhost:8080/api/clientes/" + num.ToString());
             resultado = (string)JsonConvert.DeserializeObject(resultado);
 
             Persona c = JsonConvert.DeserializeObject<Persona>(resultado);
@@ -49,6 +79,8 @@ namespace Proy_Consola_01.Controllers
                 Console.WriteLine("Cliente NO existe!!!");
 
         }
+
+
 
 
     }
