@@ -8,9 +8,20 @@ namespace Proy_Consola_01.Controllers
 {
     public class ClientesControllers
     {
+        WebClient cli;
 
+        public void Conecta()
+        {
+            // Objeto de conexion con la Web API
+            cli = new WebClient();
+            cli.Headers.Add("Content-Type:application/json");
+            cli.Headers.Add("Accept:application/json");
+        }
         public void Nuevo()
         {
+
+            Conecta();
+
             Console.WriteLine("Nuevo Cliente");
 
             Console.Write("Id     : ");
@@ -24,11 +35,7 @@ namespace Proy_Consola_01.Controllers
 
             Persona Nuevo = new Persona(id, nombre, edad);
 
-            // Objeto de conexion con la Web API
-            WebClient cli = new WebClient();
-            cli.Headers.Add("Content-Type:application/json");
-            cli.Headers.Add("Accept:application/json");
-
+            
             // envia los datos del nuevo cliente a la Web API
             var resultado = cli.UploadString("https://localhost:8080/api/clientes", "POST",
                                                JsonConvert.SerializeObject(Nuevo));
@@ -41,9 +48,8 @@ namespace Proy_Consola_01.Controllers
 
         public void Reporte()
         {
-            WebClient cli = new WebClient();
-            cli.Headers.Add("Content-Type:application/json");
-            cli.Headers.Add("Accept:application/json");
+            Conecta();
+
 
             var resultado = cli.DownloadString("https://localhost:8080/api/clientes");
 
@@ -57,12 +63,11 @@ namespace Proy_Consola_01.Controllers
 
         public void Buscar()
         {
+            Conecta();
+
             Console.Write("Numero de Cliente: ");
             int num = int.Parse(Console.ReadLine());
 
-            WebClient cli = new WebClient();
-            cli.Headers.Add("Content-Type:application/json");
-            cli.Headers.Add("Accept:application/json");
             var resultado = cli.DownloadString("https://localhost:8080/api/clientes/" + num.ToString());
             resultado = (string)JsonConvert.DeserializeObject(resultado);
 
