@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>Proy_Consola_02</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.6" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
+    <Folder Include="Db\" />
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+</Project>

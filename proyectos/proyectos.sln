@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Control-de-Errores", "Contr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proy-Consola-01", "Proy-Consola-01\Proy-Consola-01.csproj", "{A3CD9A4A-8308-41E6-8D35-1C83217A60B5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proy-04", "Proy-04\Proy-04.csproj", "{63F3C97B-597B-4748-AA98-6E68D85617A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proy-Consola-02", "Proy-Consola-02\Proy-Consola-02.csproj", "{0057A76A-3B96-4CDC-9DAF-F623D13DC0F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{A3CD9A4A-8308-41E6-8D35-1C83217A60B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3CD9A4A-8308-41E6-8D35-1C83217A60B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3CD9A4A-8308-41E6-8D35-1C83217A60B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63F3C97B-597B-4748-AA98-6E68D85617A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63F3C97B-597B-4748-AA98-6E68D85617A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63F3C97B-597B-4748-AA98-6E68D85617A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63F3C97B-597B-4748-AA98-6E68D85617A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0057A76A-3B96-4CDC-9DAF-F623D13DC0F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0057A76A-3B96-4CDC-9DAF-F623D13DC0F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0057A76A-3B96-4CDC-9DAF-F623D13DC0F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0057A76A-3B96-4CDC-9DAF-F623D13DC0F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

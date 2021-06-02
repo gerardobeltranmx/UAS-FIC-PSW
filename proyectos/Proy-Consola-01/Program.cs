@@ -14,8 +14,8 @@ namespace Proy_Consola_01
             ClientesControllers ClientesOperaciones = new ClientesControllers();
             ConsoleKey op = 0;
             do
-            {
-                Console.Clear();
+            {  
+                  Console.Clear();
                 Console.WriteLine("Menu");
                 Console.WriteLine("(N)uevo");
                 Console.WriteLine("(R)eporte");
