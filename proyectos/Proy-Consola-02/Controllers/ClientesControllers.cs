@@ -28,6 +28,20 @@ namespace Proy_Consola_02.Controllers
             }
         }
 
-
+        public void Buscar()
+        {
+            int id;
+            Datos db = new Datos();
+            Console.Write("Numero: ");
+            id = int.Parse(Console.ReadLine());
+            Cliente BuscarCliente = db.Clientes.Find(id);
+            if (BuscarCliente != null)
+            {
+                Console.WriteLine("Nombre: {0}: ", BuscarCliente.nombre);
+                Console.WriteLine("Edad : {0}: ", BuscarCliente.edad);
+            }
+            else
+                Console.WriteLine("Cliente no encontrado");
+        }
     }
 }
