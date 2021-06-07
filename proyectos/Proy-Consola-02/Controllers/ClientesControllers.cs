@@ -9,9 +9,26 @@ namespace Proy_Consola_02.Controllers
         public ClientesControllers()
         {
         }
+        public void Nuevo()
+        {
+            Console.WriteLine("Nuevo Cliente");
+            string nombre;
+            int edad;
+            Datos db = new Datos();
+            Console.Write("Nombre: ");
+            nombre = Console.ReadLine();
+            Console.Write("Edad: ");
+            edad = int.Parse(Console.ReadLine());
+            Cliente NuevoCliente = new Cliente(nombre, edad);
+            db.Clientes.Add(NuevoCliente);
+            db.SaveChanges();
+        }
+
 
         public void Reporte()
         {
+            Console.WriteLine("Reporte de Clientes");
+
             try
             {
                 Datos db = new Datos();
@@ -30,6 +47,8 @@ namespace Proy_Consola_02.Controllers
 
         public void Buscar()
         {
+            Console.WriteLine("Buscar Cliente");
+
             int id;
             Datos db = new Datos();
             Console.Write("Numero: ");
