@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore;
 using Proy_Consola_02.Db;
 using Proy_Consola_02.Models;
 
@@ -58,6 +59,37 @@ namespace Proy_Consola_02.Controllers
             {
                 Console.WriteLine("Nombre: {0}: ", BuscarCliente.nombre);
                 Console.WriteLine("Edad : {0}: ", BuscarCliente.edad);
+            }
+            else
+                Console.WriteLine("Cliente no encontrado");
+        }
+
+        public void Actualizar()
+        {
+            int id, edad;
+            string nombre;
+            Datos db = new Datos();
+            Console.WriteLine("Actualizar Cliente");
+
+            Console.Write("Numero: ");
+            id = int.Parse(Console.ReadLine());
+            
+            Cliente cliente = db.Clientes.Find(id);
+            if (cliente != null)
+            {
+                // nuevos datos del cliente
+                Console.Write("Nuevo nombre: ");
+                nombre = Console.ReadLine();
+                Console.Write("Nueva edad: ");
+                edad = int.Parse(Console.ReadLine());
+                // Actualiza en memoria al cliente
+                cliente.nombre = nombre;
+                cliente.edad = edad;
+                db.Entry(cliente).State = EntityState.Modified;
+                // Actualiza los datos del cliente en la base de datos
+                db.SaveChanges();
+                Console.WriteLine("Cliente actualizado con exito!!!");
+
             }
             else
                 Console.WriteLine("Cliente no encontrado");

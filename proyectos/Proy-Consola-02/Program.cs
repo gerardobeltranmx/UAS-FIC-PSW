@@ -40,6 +40,10 @@ namespace Proy_Consola_02
                         case ConsoleKey.B:
                             ClientesOperaciones.Buscar();
                             break;
+                        case ConsoleKey.A:
+                            ClientesOperaciones.Actualizar();
+                            break;
+
                     }
                 }
                 catch (Exception ex)
