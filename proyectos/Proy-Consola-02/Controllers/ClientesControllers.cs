@@ -94,5 +94,31 @@ namespace Proy_Consola_02.Controllers
             else
                 Console.WriteLine("Cliente no encontrado");
         }
+
+
+        public void Eliminar()
+        {
+            int id;
+            Datos db = new Datos();
+
+            Console.WriteLine("Eliminar Cliente");
+
+            Console.Write("Numero: ");
+            id = int.Parse(Console.ReadLine());
+            Cliente cliente = db.Clientes.Find(id);
+            if (cliente != null)
+            {
+                Console.WriteLine("Nombre: {0}: ", cliente.nombre);
+                Console.WriteLine("Edad : {0}: ", cliente.edad);
+                db.Clientes.Remove(cliente);
+                db.SaveChanges();
+                Console.WriteLine("Cliente eliminado con exito!!!");
+
+            }
+            else
+                Console.WriteLine("Cliente no encontrado");
+        }
+
+
     }
 }

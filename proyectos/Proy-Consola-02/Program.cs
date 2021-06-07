@@ -43,6 +43,10 @@ namespace Proy_Consola_02
                         case ConsoleKey.A:
                             ClientesOperaciones.Actualizar();
                             break;
+                        case ConsoleKey.E:
+                            ClientesOperaciones.Eliminar();
+                            break;
+
 
                     }
                 }
