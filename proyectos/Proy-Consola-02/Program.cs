@@ -14,7 +14,7 @@ namespace Proy_Consola_02
             do
             {
                 Console.Clear();
-                Console.WriteLine("Menu");
+                Console.WriteLine("Menu ");
                 Console.WriteLine("(N)uevo");
                 Console.WriteLine("(R)eporte");
                 Console.WriteLine("(B)uscar");
