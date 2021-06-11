@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Proy_04
+namespace Proy_Consola_03
 {
     public class ClientesResultados
     {

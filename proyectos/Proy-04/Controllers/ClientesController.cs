@@ -7,17 +7,18 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Proy_04.Models;
 
-namespace Proy_04
+namespace Proy_04.Controllers
 {
     [Route("api/[controller]")]
     public class ClientesController : Controller
     {
 
         string arch = @"JSON/clientes.json";
+        // string arch = @"c:\clientes.json";
 
         List<Persona> Clientes;
 
-        private void CargarJSON()
+        public ClientesController()
         {
             // Abre el archivo json
             StreamReader jsonStream = System.IO.File.OpenText(arch);
@@ -41,172 +42,152 @@ namespace Proy_04
         public ActionResult Get()
         {
             string json;
-            ClientesResultados Resultado = new ClientesResultados();
+            ClientesResult Respuesta = new ClientesResult();
+
             try
             {
-                CargarJSON();
                 if (Clientes.Count > 0)
                 {
                     json = JsonConvert.SerializeObject(Clientes);
-                    Resultado.JSON = json;
+                    Respuesta.JSON = json;
                 }
                 else
-                    throw new ClientesException("No hay Clientes");
+                    throw new ClientesException("No tenemos clientes para mostrar");
             }
             catch (ClientesException ex)
             {
-                Resultado.estado = false;
-                Resultado.MensajeError = ex.Message;
+                Respuesta.estado = false;
+                Respuesta.Mensaje = ex.Message;
             }
-            catch (IOException )
-            {
-                Resultado.estado = false;
 
-                Resultado.MensajeError = "Error en la fuente de datos";
-            }
-            catch (Exception ex)
-            {
-                Resultado.estado = false;
+            return Ok(Respuesta);
 
-                Resultado.MensajeError = ex.Message;
-            }
-            
-            return Ok(Resultado);
-            
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
         public ActionResult Get(int id)
         {
+
             string json;
             Persona Cliente;
-            ClientesResultados Resultado = new ClientesResultados();
+            ClientesResult Respuesta = new ClientesResult();
+            // Busca cliente con id
+
             try
             {
-
-                CargarJSON();
-                // Busca cliente con id
                 Cliente = Clientes.Find(c => c.id == id);
 
                 if (Cliente == null)
-                    throw new ClientesException("No existe el Cliente");
+                {
+                    throw new ClientesException("Cliente no existe");
+                }
+                else
+                {
+                    // Convierte a json el objeto cliente
+                    json = JsonConvert.SerializeObject(Cliente);
+                    Respuesta.estado = true;
+                    Respuesta.JSON = json;
 
-                // Convierte a json el objeto cliente
-                json = JsonConvert.SerializeObject(Cliente);
-                Resultado.JSON = json;
+                }
             }
-            catch (ClientesException ex)
+            catch(ClientesException ex)
             {
-                Resultado.estado = false;
-                Resultado.MensajeError = ex.Message;
+                Respuesta.estado = false;
+                Respuesta.Mensaje = ex.Message;
             }
 
-            return Ok(Resultado);
+
+            return Ok(Respuesta);
         }
 
         // POST api/values
         [HttpPost]
         public ActionResult Post([FromBody] Persona p)
         {
-            Persona Cliente=null;
-            string json;
-            ClientesResultados Resultado = new ClientesResultados();
+            ClientesResult Respuesta = new ClientesResult();
+
             try
             {
-                CargarJSON();
-                // Busca cliente con id
-                Cliente = Clientes.Find(c => c.id == p.id);
+                Persona ClienteBuscar, ClienteNuevo;
+                ClienteBuscar = Clientes.Find(c => c.id == p.id);
 
-                if (Cliente != null)
-                    throw new ClientesException("El Id del Cliente ya esta en uso");
+                if (ClienteBuscar == null) {
+                    ClienteNuevo = new Persona(p.id, p.nombre, p.edad);
+                    Clientes.Add(ClienteNuevo);
+                    ActualizarJSON();
+                    Respuesta.JSON = JsonConvert.SerializeObject(ClienteNuevo);
+                }
+                else
+                {
+                    throw new ClientesException("El Id ya esta en uso");
+                }
 
-                Cliente = new Persona(p.id, p.nombre, p.edad);
-                Clientes.Add(Cliente);
-                ActualizarJSON();
             }
-            catch (ClientesException ex){
-                Resultado.estado = false;
-                Resultado.MensajeError = ex.Message;
-            }
-            finally
+            catch (ClientesException ex)
             {
-                json = JsonConvert.SerializeObject(Cliente);
-                Resultado.JSON = json;
+                Respuesta.estado = false;
+                Respuesta.Mensaje = ex.Message;
             }
 
-            return Ok(Resultado);
 
-
+            return Ok(Respuesta);
         }
 
         // PUT api/values/5
         [HttpPut("{id}")]
         public ActionResult Put(int id, [FromBody] Persona p)
         {
-            Persona Cliente = null;
-            string json;
-            ClientesResultados Resultado = new ClientesResultados();
+
+            Persona Cliente, ClienteBuscar;
+            ClientesResult Respuesta = new ClientesResult();
             try
             {
-
-                CargarJSON();
-                // Busca cliente con id
                 Cliente = Clientes.Find(c => c.id == id);
 
                 if (Cliente == null)
-                    throw new ClientesException(string.Format("El Id {0:D} del Cliente no existe",id));
+                {
+                    throw new ClientesException("Cliente no existe");
+                }
 
-                Cliente.id = p.id;
-                Cliente.nombre = p.nombre;
-                Cliente.edad = p.edad;
+                
 
-                ActualizarJSON();
-            }
-            catch (ClientesException ex)
-            {
-                Resultado.estado = false;
-                Resultado.MensajeError = ex.Message;
-                Cliente = p;
-            }
-            finally
-            {
-                json = JsonConvert.SerializeObject(Cliente);
-                Resultado.JSON = json;
-            }
+                ClienteBuscar = Clientes.Find(c => c.id == p.id);
 
-            return Ok(Resultado);
+                if (ClienteBuscar == null)
+                {
+                    Cliente.id = p.id;
+                    Cliente.nombre = p.nombre;
+                    Cliente.edad = p.edad;
+                    Respuesta.JSON = JsonConvert.SerializeObject(p);
+                    ActualizarJSON();
+                }
+                else
+                {
+                    throw new ClientesException("El Id " + p.id +
+                                    " Ya esta en uso por el cliente: " + ClienteBuscar.nombre);
+                }
+            }
+            catch (ClientesException ex) {
+                Respuesta.estado = false;
+                Respuesta.Mensaje = ex.Message;
+                Respuesta.JSON = JsonConvert.SerializeObject(p);
+            }
+            return Ok(Respuesta);
+
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        public void Delete(int id)
         {
             Persona Cliente;
-            ClientesResultados Resultado = new ClientesResultados();
-            try
-            {
-                CargarJSON();
-                // Busca cliente con id
-                Cliente = Clientes.Find(c => c.id == id);
 
-                if (Cliente == null)
-                    throw new ClientesException(string.Format("No existe el Cliente con Id {0:D}",id));
+            Cliente = Clientes.Find(c => c.id == id);
+            Clientes.Remove(Cliente);
 
-                string json = JsonConvert.SerializeObject(Cliente);
-                Resultado.JSON = json;
-                Clientes.Remove(Cliente);
-                ActualizarJSON();
-            }
-            catch(ClientesException ex)
-            {
-                Resultado.estado = false;
-                Resultado.MensajeError = ex.Message;
-            }
-  
+            ActualizarJSON();
 
-            return Ok(Resultado);
         }
-
     }
 }
