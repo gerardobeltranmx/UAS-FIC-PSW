@@ -42,37 +42,43 @@ namespace Proy_05.Controllers
             return Ok(Respuesta);
 
         }
-    }
-}
-/*
+
+
+
         // GET api/values/5
         [HttpGet("{id}")]
         public ActionResult Get(int id)
         {
 
             string json;
-            Persona Cliente;
+            Cliente BuscarCliente;
             ClientesResult Respuesta = new ClientesResult();
             // Busca cliente con id
 
             try
             {
-                Cliente = Clientes.Find(c => c.id == id);
+                Datos db = new Datos();
+                BuscarCliente = db.Clientes.Find(id);
 
-                if (Cliente == null)
+                if (BuscarCliente == null)
                 {
                     throw new ClientesException("Cliente no existe");
                 }
                 else
                 {
                     // Convierte a json el objeto cliente
-                    json = JsonConvert.SerializeObject(Cliente);
+                    json = JsonConvert.SerializeObject(BuscarCliente);
                     Respuesta.estado = true;
                     Respuesta.JSON = json;
 
                 }
             }
-            catch(ClientesException ex)
+            catch (ClientesException ex)
+            {
+                Respuesta.estado = false;
+                Respuesta.Mensaje = ex.Message;
+            }
+            catch (Exception ex)
             {
                 Respuesta.estado = false;
                 Respuesta.Mensaje = ex.Message;
@@ -81,6 +87,10 @@ namespace Proy_05.Controllers
 
             return Ok(Respuesta);
         }
+    }
+}
+/*
+        
 
         // POST api/values
         [HttpPost]
