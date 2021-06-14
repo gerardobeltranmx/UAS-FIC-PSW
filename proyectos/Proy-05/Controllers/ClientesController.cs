@@ -87,6 +87,49 @@ namespace Proy_05.Controllers
 
             return Ok(Respuesta);
         }
+
+
+        // POST api/values
+        [HttpPost]
+        public ActionResult Post([FromBody] Cliente c)
+        {
+            ClientesResult Respuesta = new ClientesResult();
+
+            try
+            {
+                Datos db = new Datos();
+                Cliente ClienteBuscar, ClienteNuevo;
+                ClienteBuscar = db.Clientes.Find(c.id);
+
+                if (ClienteBuscar == null)
+                {
+                    ClienteNuevo = new Cliente(c.nombre, c.edad);
+                    db.Clientes.Add(ClienteNuevo);
+                    db.SaveChanges();
+                    Respuesta.JSON = JsonConvert.SerializeObject(ClienteNuevo);
+                }
+                else
+                {
+                    throw new ClientesException("El Id ya esta en uso");
+                }
+
+            }
+            catch (ClientesException ex)
+            {
+                Respuesta.estado = false;
+                Respuesta.Mensaje = ex.Message;
+            }
+            catch (Exception ex)
+            {
+                Respuesta.estado = false;
+                Respuesta.Mensaje = ex.Message;
+            }
+
+
+            return Ok(Respuesta);
+        }
+
+
     }
 }
 /*
