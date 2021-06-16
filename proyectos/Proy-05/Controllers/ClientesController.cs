@@ -173,70 +173,44 @@ namespace Proy_05.Controllers
             return Ok(Respuesta);
 
         }
-
-    }
-}
-/*
-        
-
-        
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] Persona p)
-        {
-
-            Persona Cliente, ClienteBuscar;
-            ClientesResult Respuesta = new ClientesResult();
-            try
-            {
-                Cliente = Clientes.Find(c => c.id == id);
-
-                if (Cliente == null)
-                {
-                    throw new ClientesException("Cliente no existe");
-                }
-
-                
-
-                ClienteBuscar = Clientes.Find(c => c.id == p.id);
-
-                if (ClienteBuscar == null)
-                {
-                    Cliente.id = p.id;
-                    Cliente.nombre = p.nombre;
-                    Cliente.edad = p.edad;
-                    Respuesta.JSON = JsonConvert.SerializeObject(p);
-                    ActualizarJSON();
-                }
-                else
-                {
-                    throw new ClientesException("El Id " + p.id +
-                                    " Ya esta en uso por el cliente: " + ClienteBuscar.nombre);
-                }
-            }
-            catch (ClientesException ex) {
-                Respuesta.estado = false;
-                Respuesta.Mensaje = ex.Message;
-                Respuesta.JSON = JsonConvert.SerializeObject(p);
-            }
-            return Ok(Respuesta);
-
-        }
-
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
-            Persona Cliente;
+            ClientesResult Respuesta = new ClientesResult();
 
-            Cliente = Clientes.Find(c => c.id == id);
-            Clientes.Remove(Cliente);
+            Cliente BuscarCliente;
+            try
+            {
+                Datos db = new Datos();
+                BuscarCliente = db.Clientes.Find(id);
 
-            ActualizarJSON();
+                if (BuscarCliente == null)
+                {
+                    throw new ClientesException("Cliente no existe para borrar!"); 
+                }
+                else {
+                    db.Clientes.Remove(BuscarCliente);
 
+                    db.SaveChanges();
+                    Respuesta.estado = true;
+                    Respuesta.JSON = JsonConvert.SerializeObject(BuscarCliente);
+                }
+
+            }
+            catch(ClientesException ex)
+            {
+                Respuesta.estado = false;
+                Respuesta.Mensaje = ex.Message;
+            }
+            catch (Exception)
+            {
+                Respuesta.estado = false;
+                Respuesta.Mensaje = "Falla en el sistema reporte al administrador!";
+            }
+
+            return Ok(Respuesta);
         }
 
     }
 }
-*/
