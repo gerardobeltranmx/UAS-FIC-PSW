@@ -130,43 +130,56 @@ namespace Proy_05.Controllers
         }
 
 
-    }
-}
-/*
-        
-
-        // POST api/values
-        [HttpPost]
-        public ActionResult Post([FromBody] Persona p)
+        // PUT api/values/5
+        [HttpPut("{id}")]
+        public ActionResult Put(int id, [FromBody] Cliente c)
         {
-            ClientesResult Respuesta = new ClientesResult();
 
+             Cliente BuscarCliente;
+            ClientesResult Respuesta = new ClientesResult();
             try
             {
-                Persona ClienteBuscar, ClienteNuevo;
-                ClienteBuscar = Clientes.Find(c => c.id == p.id);
+                Datos db = new Datos();
+                BuscarCliente = db.Clientes.Find(id);
 
-                if (ClienteBuscar == null) {
-                    ClienteNuevo = new Persona(p.id, p.nombre, p.edad);
-                    Clientes.Add(ClienteNuevo);
-                    ActualizarJSON();
-                    Respuesta.JSON = JsonConvert.SerializeObject(ClienteNuevo);
+                if (BuscarCliente == null)
+                {
+                    throw new ClientesException("Cliente no existe");
                 }
                 else
                 {
-                    throw new ClientesException("El Id ya esta en uso");
-                }
+                    BuscarCliente.nombre = c.nombre;
+                    BuscarCliente.edad = c.edad;
+                    db.SaveChanges();
+                    Respuesta.estado = true;
+                    Respuesta.JSON = JsonConvert.SerializeObject(BuscarCliente);
 
+                }
+  
             }
             catch (ClientesException ex)
             {
                 Respuesta.estado = false;
                 Respuesta.Mensaje = ex.Message;
+                Respuesta.JSON = JsonConvert.SerializeObject(c);
             }
+            catch(Exception )
+            {
+                Respuesta.estado = false;
+                Respuesta.Mensaje = "Se presento un error en el sistema, consulta al administrador";
+                Respuesta.JSON = JsonConvert.SerializeObject(c);
 
-
+            }
             return Ok(Respuesta);
+
         }
+
+    }
+}
+/*
+        
+
+        
 
         // PUT api/values/5
         [HttpPut("{id}")]
