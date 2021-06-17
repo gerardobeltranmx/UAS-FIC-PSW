@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Proy_Consola_02.Models
+namespace Proy_Consola_03.Models
 {
     public class Cliente
     {

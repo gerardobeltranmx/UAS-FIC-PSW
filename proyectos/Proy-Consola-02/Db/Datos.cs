@@ -11,7 +11,7 @@ namespace Proy_Consola_02.Db
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string Conexion = @"Server = servidordbs.database.windows.net;
+            string Conexion = @"Server = dbservidor.database.windows.net;
                                 Database = acmedb;
                                 User = userdb;
                                 Password = 12AB34cd*;";
