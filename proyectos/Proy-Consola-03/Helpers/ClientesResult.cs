@@ -5,20 +5,20 @@ namespace Proy_Consola_03
     {
         public bool estado { get; set; }
         public string Mensaje { get; set; }
-        public string JSON { get; set; }
+        public object Datos { get; set; }
 
         public ClientesResult()
         {
             estado = true;
             Mensaje = "Sin Error";
-            JSON = "{}";
+            Datos = null;
         }
 
-        public ClientesResult(bool estado, string Mensaje, string JSON)
+        public ClientesResult(bool estado, string Mensaje, object Datos)
         {
             this.estado = estado;
             this.Mensaje = Mensaje;
-            this.JSON = JSON;
+            this.Datos = Datos;
         }
     }
 }

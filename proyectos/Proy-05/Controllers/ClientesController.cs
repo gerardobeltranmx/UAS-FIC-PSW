@@ -15,10 +15,9 @@ namespace Proy_05.Controllers
     {
 
         // GET: api/values
-        [HttpGet]
-        public ActionResult Get()
+        [HttpGet("Todos")]
+        public ActionResult Todos()
         {
-            string json;
             ClientesResult Respuesta = new ClientesResult();
 
             Datos db = new Datos();
@@ -27,8 +26,8 @@ namespace Proy_05.Controllers
             {
                 if (db.Clientes != null)
                 {
-                    json = JsonConvert.SerializeObject(db.Clientes);
-                    Respuesta.JSON = json;
+                    //json = JsonConvert.SerializeObject(db.Clientes);
+                    Respuesta.Datos = db.Clientes;
                 }
                 else
                     throw new ClientesException("No tenemos clientes para mostrar");
@@ -46,8 +45,8 @@ namespace Proy_05.Controllers
 
 
         // GET api/values/5
-        [HttpGet("{id}")]
-        public ActionResult Get(int id)
+        [HttpGet("Buscar/{id}")]
+        public ActionResult Buscar(int id)
         {
 
             string json;
@@ -67,9 +66,9 @@ namespace Proy_05.Controllers
                 else
                 {
                     // Convierte a json el objeto cliente
-                    json = JsonConvert.SerializeObject(BuscarCliente);
+                   // json = JsonConvert.SerializeObject(BuscarCliente);
                     Respuesta.estado = true;
-                    Respuesta.JSON = json;
+                    Respuesta.Datos = BuscarCliente;
 
                 }
             }
@@ -90,8 +89,8 @@ namespace Proy_05.Controllers
 
 
         // POST api/values
-        [HttpPost]
-        public ActionResult Post([FromBody] Cliente c)
+        [HttpPost("Nuevo")]
+        public ActionResult Nuevo([FromBody] Cliente c)
         {
             ClientesResult Respuesta = new ClientesResult();
 
@@ -106,7 +105,7 @@ namespace Proy_05.Controllers
                     ClienteNuevo = new Cliente(c.nombre, c.edad);
                     db.Clientes.Add(ClienteNuevo);
                     db.SaveChanges();
-                    Respuesta.JSON = JsonConvert.SerializeObject(ClienteNuevo);
+                    Respuesta.Datos = ClienteNuevo;
                 }
                 else
                 {
@@ -131,8 +130,8 @@ namespace Proy_05.Controllers
 
 
         // PUT api/values/5
-        [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] Cliente c)
+        [HttpPut("Actualizar/{id}")]
+        public ActionResult Actualizar(int id, [FromBody] Cliente c)
         {
 
              Cliente BuscarCliente;
@@ -152,7 +151,7 @@ namespace Proy_05.Controllers
                     BuscarCliente.edad = c.edad;
                     db.SaveChanges();
                     Respuesta.estado = true;
-                    Respuesta.JSON = JsonConvert.SerializeObject(BuscarCliente);
+                    Respuesta.Datos = BuscarCliente;
 
                 }
   
@@ -161,21 +160,21 @@ namespace Proy_05.Controllers
             {
                 Respuesta.estado = false;
                 Respuesta.Mensaje = ex.Message;
-                Respuesta.JSON = JsonConvert.SerializeObject(c);
+                Respuesta.Datos = c;
             }
             catch(Exception )
             {
                 Respuesta.estado = false;
                 Respuesta.Mensaje = "Se presento un error en el sistema, consulta al administrador";
-                Respuesta.JSON = JsonConvert.SerializeObject(c);
+                Respuesta.Datos =c;
 
             }
             return Ok(Respuesta);
 
         }
         // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        [HttpDelete("Eliminar/{id}")]
+        public ActionResult Eliminar(int id)
         {
             ClientesResult Respuesta = new ClientesResult();
 
@@ -194,7 +193,7 @@ namespace Proy_05.Controllers
 
                     db.SaveChanges();
                     Respuesta.estado = true;
-                    Respuesta.JSON = JsonConvert.SerializeObject(BuscarCliente);
+                    Respuesta.Datos = BuscarCliente;
                 }
 
             }
