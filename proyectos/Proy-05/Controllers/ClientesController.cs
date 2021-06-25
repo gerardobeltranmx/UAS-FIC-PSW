@@ -26,8 +26,8 @@ namespace Proy_05.Controllers
             {
                 if (db.Clientes != null)
                 {
-                    //json = JsonConvert.SerializeObject(db.Clientes);
-                    Respuesta.Datos = db.Clientes;
+                 //  string json = JsonConvert.SerializeObject(db.Clientes);
+                    Respuesta.Datos = db.Clientes.ToList();  //  json;
                 }
                 else
                     throw new ClientesException("No tenemos clientes para mostrar");

@@ -5,7 +5,7 @@ namespace Proy_Consola_03
     {
         public bool estado { get; set; }
         public string Mensaje { get; set; }
-        public object Datos { get; set; }
+        public object  Datos { get; set; }
 
         public ClientesResult()
         {
