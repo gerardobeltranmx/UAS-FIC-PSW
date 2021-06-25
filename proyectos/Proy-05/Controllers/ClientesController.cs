@@ -42,6 +42,41 @@ namespace Proy_05.Controllers
 
         }
 
+        // GET: api/values
+        [HttpGet("TodosOrdenadosPorNombre")]
+        public ActionResult TodosOrdenadosPorNombre()
+        {
+            ClientesResult Respuesta = new ClientesResult();
+
+            Datos db = new Datos();
+
+
+            // Acceso con Linq to SQL (Ordenamiento)
+            var ListaClientes = from c in db.Clientes orderby c.edad select c;
+                                    
+
+
+            try
+            {
+                if (ListaClientes != null)
+                {
+                    //  string json = JsonConvert.SerializeObject(db.Clientes);
+                    Respuesta.Datos = ListaClientes;  //  json;
+                }
+                else
+                    throw new ClientesException("No tenemos clientes para mostrar");
+            }
+            catch (ClientesException ex)
+            {
+                Respuesta.estado = false;
+                Respuesta.Mensaje = ex.Message;
+            }
+
+            return Ok(Respuesta);
+
+        }
+
+
 
 
         // GET api/values/5
