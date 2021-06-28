@@ -43,8 +43,8 @@ namespace Proy_05.Controllers
         }
 
         // GET: api/values
-        [HttpGet("TodosOrdenadosPorCliente")]
-        public ActionResult TodosOrdenadosPorNombre()
+        [HttpGet("TodosOrdenadosPorIDCliente")]
+        public ActionResult TodosOrdenadosPorIDCliente()
         {
             MovimientosResult Respuesta = new MovimientosResult();
 
@@ -52,15 +52,16 @@ namespace Proy_05.Controllers
 
 
             // Acceso con Linq to SQL (Ordenamiento)
-            // Select * from Movimientos order by edad
-            // var ListaMovimientos = from c in db.Movimientos orderby c.edad select c;
-            // Select id, nombre from Movimientos order by nombre;                      
-            var ListaMovimientos = from c in db.Movimientos
-                                    orderby c.idcliente
+            var ListaMovimientos = from m in db.Movimientos
+                                   join c in db.Clientes
+                                        on m.idcliente equals c.id
+                                    orderby m.idcliente
                                     select new {
-                                                c.id,
-                                                c.tipo,
-                                                c.cantidad
+                                                m.id,
+                                                m.idcliente,
+                                                c.nombre,
+                                                m.tipo,
+                                                m.cantidad
 
                                             };
 
@@ -69,7 +70,6 @@ namespace Proy_05.Controllers
             {
                 if (ListaMovimientos != null)
                 {
-                    //  string json = JsonConvert.SerializeObject(db.Movimientos);
                     Respuesta.Datos = ListaMovimientos;  //  json;
                 }
                 else
