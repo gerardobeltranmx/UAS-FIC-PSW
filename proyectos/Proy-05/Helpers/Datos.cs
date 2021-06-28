@@ -8,6 +8,7 @@ namespace Proy_05.Helpers
     {
         // Tabla Clientes 
         public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Movimiento> Movimientos { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -11,28 +11,28 @@ using Proy_05.Models;
 namespace Proy_05.Controllers
 {
     [Route("api/[controller]")]
-    public class ClientesController : Controller
+    public class MovimientosController : Controller
     {
 
         // GET: api/values
         [HttpGet("Todos")]
         public ActionResult Todos()
         {
-            ClientesResult Respuesta = new ClientesResult();
+            MovimientosResult Respuesta = new MovimientosResult();
 
             Datos db = new Datos();
 
             try
             {
-                if (db.Clientes != null)
+                if (db.Movimientos != null)
                 {
-                 //  string json = JsonConvert.SerializeObject(db.Clientes);
-                    Respuesta.Datos = db.Clientes.ToList();  //  json;
+                 //  string json = JsonConvert.SerializeObject(db.Movimientos);
+                    Respuesta.Datos = db.Movimientos.ToList();  //  json;
                 }
                 else
-                    throw new ClientesException("No tenemos clientes para mostrar");
+                    throw new MovimientosException("No tenemos Movimientos para mostrar");
             }
-            catch (ClientesException ex)
+            catch (MovimientosException ex)
             {
                 Respuesta.estado = false;
                 Respuesta.Mensaje = ex.Message;
@@ -43,37 +43,39 @@ namespace Proy_05.Controllers
         }
 
         // GET: api/values
-        [HttpGet("TodosOrdenadosPorNombre")]
+        [HttpGet("TodosOrdenadosPorCliente")]
         public ActionResult TodosOrdenadosPorNombre()
         {
-            ClientesResult Respuesta = new ClientesResult();
+            MovimientosResult Respuesta = new MovimientosResult();
 
             Datos db = new Datos();
 
 
             // Acceso con Linq to SQL (Ordenamiento)
-            // Select * from Clientes order by edad
-            // var ListaClientes = from c in db.Clientes orderby c.edad select c;
-            // Select id, nombre from Clientes order by nombre;                      
-            var ListaClientes = from c in db.Clientes
-                                    orderby c.edad
+            // Select * from Movimientos order by edad
+            // var ListaMovimientos = from c in db.Movimientos orderby c.edad select c;
+            // Select id, nombre from Movimientos order by nombre;                      
+            var ListaMovimientos = from c in db.Movimientos
+                                    orderby c.idcliente
                                     select new {
-                                                numCta=c.id,
-                                                NombreCompleto=c.nombre
+                                                c.id,
+                                                c.tipo,
+                                                c.cantidad
+
                                             };
 
 
             try
             {
-                if (ListaClientes != null)
+                if (ListaMovimientos != null)
                 {
-                    //  string json = JsonConvert.SerializeObject(db.Clientes);
-                    Respuesta.Datos = ListaClientes;  //  json;
+                    //  string json = JsonConvert.SerializeObject(db.Movimientos);
+                    Respuesta.Datos = ListaMovimientos;  //  json;
                 }
                 else
-                    throw new ClientesException("No tenemos clientes para mostrar");
+                    throw new MovimientosException("No tenemos Movimientos para mostrar");
             }
-            catch (ClientesException ex)
+            catch (MovimientosException ex)
             {
                 Respuesta.estado = false;
                 Respuesta.Mensaje = ex.Message;
@@ -85,7 +87,7 @@ namespace Proy_05.Controllers
 
 
 
-
+        /*
         // GET api/values/5
         [HttpGet("Buscar/{id}")]
         public ActionResult Buscar(int id)
@@ -93,21 +95,21 @@ namespace Proy_05.Controllers
 
             string json;
             Cliente BuscarCliente;
-            ClientesResult Respuesta = new ClientesResult();
+            MovimientosResult Respuesta = new MovimientosResult();
             // Busca cliente con id
 
             try
             {
                 Datos db = new Datos();
-                //BuscarCliente = db.Clientes.Find(id);
+                //BuscarCliente = db.Movimientos.Find(id);
                 // Buscar cliente usando Linq to SQL
-                BuscarCliente = (from c in db.Clientes
+                BuscarCliente = (from c in db.Movimientos
                                  where c.id == id
                                  select c).FirstOrDefault<Cliente>();
 
                 if (BuscarCliente == null)
                 {
-                    throw new ClientesException("Cliente no existe");
+                    throw new MovimientosException("Cliente no existe");
                 }
                 else
                 {
@@ -118,7 +120,7 @@ namespace Proy_05.Controllers
 
                 }
             }
-            catch (ClientesException ex)
+            catch (MovimientosException ex)
             {
                 Respuesta.estado = false;
                 Respuesta.Mensaje = ex.Message;
@@ -133,33 +135,33 @@ namespace Proy_05.Controllers
             return Ok(Respuesta);
         }
 
-
+      
         // POST api/values
         [HttpPost("Nuevo")]
         public ActionResult Nuevo([FromBody] Cliente c)
         {
-            ClientesResult Respuesta = new ClientesResult();
+            MovimientosResult Respuesta = new MovimientosResult();
 
             try
             {
                 Datos db = new Datos();
                 Cliente ClienteBuscar, ClienteNuevo;
-                ClienteBuscar = db.Clientes.Find(c.id);
+                ClienteBuscar = db.Movimientos.Find(c.id);
 
                 if (ClienteBuscar == null)
                 {
                     ClienteNuevo = new Cliente(c.nombre, c.edad);
-                    db.Clientes.Add(ClienteNuevo);
+                    db.Movimientos.Add(ClienteNuevo);
                     db.SaveChanges();
                     Respuesta.Datos = ClienteNuevo;
                 }
                 else
                 {
-                    throw new ClientesException("El Id ya esta en uso");
+                    throw new MovimientosException("El Id ya esta en uso");
                 }
 
             }
-            catch (ClientesException ex)
+            catch (MovimientosException ex)
             {
                 Respuesta.estado = false;
                 Respuesta.Mensaje = ex.Message;
@@ -181,15 +183,15 @@ namespace Proy_05.Controllers
         {
 
              Cliente BuscarCliente;
-            ClientesResult Respuesta = new ClientesResult();
+            MovimientosResult Respuesta = new MovimientosResult();
             try
             {
                 Datos db = new Datos();
-                BuscarCliente = db.Clientes.Find(id);
+                BuscarCliente = db.Movimientos.Find(id);
 
                 if (BuscarCliente == null)
                 {
-                    throw new ClientesException("Cliente no existe");
+                    throw new MovimientosException("Cliente no existe");
                 }
                 else
                 {
@@ -202,7 +204,7 @@ namespace Proy_05.Controllers
                 }
   
             }
-            catch (ClientesException ex)
+            catch (MovimientosException ex)
             {
                 Respuesta.estado = false;
                 Respuesta.Mensaje = ex.Message;
@@ -222,20 +224,20 @@ namespace Proy_05.Controllers
         [HttpDelete("Eliminar/{id}")]
         public ActionResult Eliminar(int id)
         {
-            ClientesResult Respuesta = new ClientesResult();
+            MovimientosResult Respuesta = new MovimientosResult();
 
             Cliente BuscarCliente;
             try
             {
                 Datos db = new Datos();
-                BuscarCliente = db.Clientes.Find(id);
+                BuscarCliente = db.Movimientos.Find(id);
 
                 if (BuscarCliente == null)
                 {
-                    throw new ClientesException("Cliente no existe para borrar!"); 
+                    throw new MovimientosException("Cliente no existe para borrar!"); 
                 }
                 else {
-                    db.Clientes.Remove(BuscarCliente);
+                    db.Movimientos.Remove(BuscarCliente);
 
                     db.SaveChanges();
                     Respuesta.estado = true;
@@ -243,7 +245,7 @@ namespace Proy_05.Controllers
                 }
 
             }
-            catch(ClientesException ex)
+            catch(MovimientosException ex)
             {
                 Respuesta.estado = false;
                 Respuesta.Mensaje = ex.Message;
@@ -256,6 +258,6 @@ namespace Proy_05.Controllers
 
             return Ok(Respuesta);
         }
-
+          */
     }
 }
